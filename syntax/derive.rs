@@ -21,6 +21,7 @@ pub(crate) enum Trait {
     PartialOrd,
     Serialize,
     Deserialize,
+    TS,
 }
 
 impl Derive {
@@ -38,6 +39,7 @@ impl Derive {
             "PartialOrd" => Trait::PartialOrd,
             "Serialize" => Trait::Serialize,
             "Deserialize" => Trait::Deserialize,
+            "TS" => Trait::TS,
             _ => return None,
         };
         let span = ident.span();
@@ -66,6 +68,7 @@ impl AsRef<str> for Trait {
             Trait::PartialOrd => "PartialOrd",
             Trait::Serialize => "Serialize",
             Trait::Deserialize => "Deserialize",
+            Trait::TS => "TS",
         }
     }
 }

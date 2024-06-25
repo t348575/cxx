@@ -26,6 +26,7 @@ pub(crate) fn expand_struct(
             Trait::PartialOrd => expanded.extend(struct_partial_ord(strct, span)),
             Trait::Serialize => traits.push(quote_spanned!(span=> ::serde::Serialize)),
             Trait::Deserialize => traits.push(quote_spanned!(span=> ::serde::Deserialize)),
+            Trait::TS => traits.push(quote_spanned!(span=> ::ts_rs::TS)),
         }
     }
 
@@ -73,6 +74,7 @@ pub(crate) fn expand_enum(enm: &Enum, actual_derives: &mut Option<TokenStream>) 
             Trait::PartialOrd => expanded.extend(enum_partial_ord(enm, span)),
             Trait::Serialize => traits.push(quote_spanned!(span=> ::serde::Serialize)),
             Trait::Deserialize => traits.push(quote_spanned!(span=> ::serde::Deserialize)),
+            Trait::TS => traits.push(quote_spanned!(span=> ::ts_rs::TS)),
         }
     }
 

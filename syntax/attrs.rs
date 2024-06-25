@@ -166,6 +166,9 @@ pub(crate) fn parse(cx: &mut Errors, attrs: Vec<Attribute>, mut parser: Parser) 
         } else if attr_path.is_ident("serde") {
             passthrough_attrs.push(attr);
             continue;
+        } else if attr_path.is_ident("ts") {
+            passthrough_attrs.push(attr);
+            continue;
         } else if attr_path.segments.len() > 1 {
             let tool = &attr_path.segments.first().unwrap().ident;
             if tool == "rustfmt" {
@@ -213,7 +216,6 @@ fn parse_doc_attribute(meta: &Meta) -> Result<DocAttribute> {
 
 fn parse_derive_attribute(cx: &mut Errors, input: ParseStream) -> Result<Vec<Derive>> {
     let paths = input.parse_terminated(Path::parse_mod_style, Token![,])?;
-
     let mut derives = Vec::new();
     for path in paths {
         if let Some(ident) = path.get_ident() {
